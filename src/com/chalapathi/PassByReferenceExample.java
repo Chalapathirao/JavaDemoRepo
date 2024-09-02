@@ -3,6 +3,9 @@ package com.chalapathi;
 public class PassByReferenceExample {
     public static void main(String[] args) {
         Person person = new Person("Alice", 30);
+        System.out.println(person.getName()); // Output: Bob
+        System.out.println(person.getAge()); // Output: 40
+
         modifyPerson(person);
         System.out.println(person.getName()); // Output: Bob
         System.out.println(person.getAge()); // Output: 40
