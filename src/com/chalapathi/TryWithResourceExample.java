@@ -31,6 +31,7 @@ public class TryWithResourceExample {
 
     private static void tryWithResourceJava7() {
         String path = "example.txt";
+
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {

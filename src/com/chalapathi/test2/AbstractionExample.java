@@ -1,4 +1,4 @@
-package com.chalapathi;
+package com.chalapathi.test2;
 
 // Abstract class
 abstract class Vehicle {
