@@ -1,4 +1,4 @@
-package com.chalapathi;
+package com.chalapathi.test4;
 
 public class PassByValueExample {
     public static void main(String[] args) {

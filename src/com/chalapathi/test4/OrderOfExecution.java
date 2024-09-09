@@ -1,4 +1,4 @@
-package com.chalapathi;
+package com.chalapathi.test4;
 
 public class OrderOfExecution {
     static {
