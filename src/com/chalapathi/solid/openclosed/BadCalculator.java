@@ -1,4 +1,4 @@
-package com.chalapathi.solid.singleresponsiblity.openclosed;
+package com.chalapathi.solid.openclosed;
 
 //This bad design where we are taking type
 // and for each type we are having cases

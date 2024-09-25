@@ -1,4 +1,4 @@
-package com.chalapathi.solid.singleresponsiblity.openclosed;
+package com.chalapathi.solid.openclosed;
 
 // No modifications in our calculator functionality
 // We can keep adding extension by create new operations

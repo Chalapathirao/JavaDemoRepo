@@ -1,4 +1,4 @@
-package com.chalapathi.solid.singleresponsiblity.openclosed;
+package com.chalapathi.solid.openclosed;
 
 public class AddOperation implements Operation{
     @Override

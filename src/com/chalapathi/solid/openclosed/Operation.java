@@ -1,4 +1,4 @@
-package com.chalapathi.solid.singleresponsiblity.openclosed;
+package com.chalapathi.solid.openclosed;
 
 // This is good we keep adding new operation implementation
 // and our calculator get extensions without modifying it main task
