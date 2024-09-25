@@ -30,7 +30,7 @@ public class ExecuterService1 {
         executorService1.shutdown();*/
 
 
-        /*Future<?> future1 = executorService.submit(new Runnable() {
+        Future<?> future1 = executorService.submit(new Runnable() {
             @Override
             public void run() {
                 System.out.println("Asynchronous task running using submit");
@@ -45,7 +45,7 @@ public class ExecuterService1 {
                 return "Callable Result";
             }
         });
-        System.out.println(future2.get());*/
+        System.out.println(future2.get());
 
         Set<Callable<String>> callables = new HashSet<Callable<String>>();
         callables.add(new Callable<String>() {
