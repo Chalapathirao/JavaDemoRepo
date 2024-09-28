@@ -22,33 +22,41 @@ class Customer {
         this.email = email;
         this.phoneNumbers = phoneNumbers;
     }
+
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public Optional<String> getEmail() {
         return Optional.ofNullable(email);
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
+
     public List<String> getPhoneNumbers() {
         return phoneNumbers;
     }
+
     public void setPhoneNumbers(List<String> phoneNumbers) {
         this.phoneNumbers = phoneNumbers;
     }
 }
 
- class EkartDataBase {
+class EkartDataBase {
     public static List<Customer> getAll() {
         return Stream.of(
                 new Customer(101, "john", "john@gmail.com", Arrays.asList("397937955", "21654725")),
@@ -61,7 +69,38 @@ class Customer {
 
 
 public class OptionalDemo {
-    public static void main(String[] args) {
+    public static Customer getCustomerByEmailId(String email) throws Exception {
+        List<Customer> customers = EkartDataBase.getAll();
+        return customers.stream().filter(customer -> customer.getEmail().equals(Optional.ofNullable(email))).findAny().orElseThrow(() -> new Exception("no customer present with this email id"));
+    }
+
+    public static void main(String[] args) throws Exception {
+        //getCustomerByEmailId("pqr");
+        Customer customer = getCustomerByEmailId("smith@gmail.com");
+        System.out.println(customer.getName());
+
+
+        //empty
+        //of
+        //ofNullable
+
+        Optional<Object> emptyOptional = Optional.empty();
+        System.out.println(emptyOptional);
+
+        //Optional<String> emailOptional = Optional.of(customer.getEmail());
+        //System.out.println(emailOptional);
+
+        Optional<String> emailOptional2 = Optional.of(customer.getEmail().get());
+       /* if(emailOptional2.isPresent()){
+            System.out.println(emailOptional2.get());
+        }*/
+        // System.out.println(emailOptional2.orElse("default@email.com"));
+
+        // System.out.println(emailOptional2.orElseThrow(()->new IllegalArgumentException("email not present")));
+        System.out.println(emailOptional2.map(String::toUpperCase).orElseGet(()->"default email..."));
+
 
     }
+
+
 }
