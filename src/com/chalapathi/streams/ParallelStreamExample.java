@@ -28,10 +28,10 @@ public class ParallelStreamExample {
             System.out.println("Thread : "+Thread.currentThread().getName()+" : "+x);
         });*/
 
-        List<Employee> employees = DataBase.getEmployees();
+        List<Employee5> employees = DataBase.getEmployees();
         double salaryWithStream = employees.stream()
-                .map(Employee::getSalary).mapToDouble(i -> i).average().getAsDouble();
+                .map(Employee5::getSalary).mapToDouble(i -> i).average().getAsDouble();
         System.out.println(salaryWithStream);
-        System.out.println(employees.parallelStream().mapToDouble(Employee::getSalary).average().getAsDouble());
+        System.out.println(employees.parallelStream().mapToDouble(Employee5::getSalary).average().getAsDouble());
     }
 }

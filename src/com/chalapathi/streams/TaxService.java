@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-class Employee {
+class Employee5 {
     private int id;
     private String name;
     private String dept;
@@ -43,7 +43,7 @@ class Employee {
         this.salary = salary;
     }
 
-    public Employee(int id, String name, String dept, long salary) {
+    public Employee5(int id, String name, String dept, long salary) {
         super();
         this.id = id;
         this.name = name;
@@ -51,31 +51,31 @@ class Employee {
         this.salary = salary;
     }
 
-    public Employee() {
+    public Employee5() {
         super();
         // TODO Auto-generated constructor stub
     }
 
     @Override
     public String toString() {
-        return "Employee [id=" + id + ", name=" + name + ", dept=" + dept + ", salary=" + salary + "]";
+        return "Employee5 [id=" + id + ", name=" + name + ", dept=" + dept + ", salary=" + salary + "]";
     }
 }
 
 class DataBase {
-    public static List<Employee> getEmployees() {
-        List<Employee> list = new ArrayList<>();
-        list.add(new Employee(176, "Roshan", "IT", 600000));
-        list.add(new Employee(388, "Bikash", "CIVIL", 900000));
-        list.add(new Employee(470, "Bimal", "DEFENCE", 500000));
-        list.add(new Employee(624, "Sourav", "CORE", 400000));
-        list.add(new Employee(176, "Prakash", "SOCIAL", 1200000));
+    public static List<Employee5> getEmployees() {
+        List<Employee5> list = new ArrayList<>();
+        list.add(new Employee5(176, "Roshan", "IT", 600000));
+        list.add(new Employee5(388, "Bikash", "CIVIL", 900000));
+        list.add(new Employee5(470, "Bimal", "DEFENCE", 500000));
+        list.add(new Employee5(624, "Sourav", "CORE", 400000));
+        list.add(new Employee5(176, "Prakash", "SOCIAL", 1200000));
         return list;
     }
 }
 
 public class TaxService {
-    public static List<Employee> evaluateTaxUsers(String input) {
+    public static List<Employee5> evaluateTaxUsers(String input) {
         return (input.equalsIgnoreCase("tax"))
                 ? DataBase.getEmployees().stream().filter(emp -> emp.getSalary() > 500000).collect(Collectors.toList())
                 : DataBase.getEmployees().stream().filter(emp -> emp.getSalary() <= 500000)

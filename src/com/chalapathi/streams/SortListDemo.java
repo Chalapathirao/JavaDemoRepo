@@ -20,12 +20,12 @@ public class SortListDemo {
 //        list.sort(Comparator.reverseOrder());
 //        System.out.println(list);
 //        list.stream().sorted(Comparator.reverseOrder()).forEach(s -> System.out.println(s));//descending
-        List<Employee> employees = DataBase.getEmployees();
+        List<Employee5> employees = DataBase.getEmployees();
 
-		/*Collections.sort(employees, new Comparator<Employee>() {
+		/*Collections.sort(employees, new Comparator<Employee5>() {
 
 			@Override
-			public int compare(Employee o1, Employee o2) {
+			public int compare(Employee5 o1, Employee5 o2) {
 				return (int) (o1.getSalary() - o2.getSalary());// ascending
 			}
 		});*/
@@ -40,7 +40,7 @@ public class SortListDemo {
 
         //employees.stream().sorted(Comparator.comparing(emp->emp.getSalary())).forEach(System.out::println);
 
-        employees.stream().sorted(Comparator.comparing(Employee::getDept)).forEach(System.out::println);
+        employees.stream().sorted(Comparator.comparing(Employee5::getDept)).forEach(System.out::println);
 
 
     }
