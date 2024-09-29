@@ -1,4 +1,4 @@
-package com.chalapathi.Test8;
+package com.chalapathi.streams;
 
 import java.util.*;
 import java.util.stream.Collectors;

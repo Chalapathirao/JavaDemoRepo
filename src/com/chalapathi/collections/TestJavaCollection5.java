@@ -1,4 +1,4 @@
-package com.chalapathi.test6;
+package com.chalapathi.collections;
 
 import java.util.*;
 public class TestJavaCollection5{

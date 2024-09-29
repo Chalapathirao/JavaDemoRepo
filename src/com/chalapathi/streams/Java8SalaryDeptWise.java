@@ -1,4 +1,4 @@
-package com.chalapathi.Test8;
+package com.chalapathi.streams;
 
 import java.util.Arrays;
 import java.util.DoubleSummaryStatistics;

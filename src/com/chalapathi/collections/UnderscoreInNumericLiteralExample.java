@@ -1,4 +1,4 @@
-package com.chalapathi.test6;
+package com.chalapathi.collections;
 
 public class UnderscoreInNumericLiteralExample {
     public static void main(String[] args) {

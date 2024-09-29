@@ -1,6 +1,4 @@
-package com.chalapathi.test6;
-
-import java.util.Collection;
+package com.chalapathi.collections;
 
 public class TestGenerics3 {
     public static void main(String args[]) {

@@ -1,5 +1,4 @@
-package com.chalapathi.test6;
-import java.util.Iterator;
+package com.chalapathi.collections;
 import java.util.PriorityQueue;
 
 public class PriorityQueueExample {
