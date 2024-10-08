@@ -83,7 +83,7 @@ public class Java8SalaryDeptWise {
         );
         List<Employee> empList = employees.stream().map(e -> new Employee(e.getId(),e.getName().toUpperCase(), e.getSalary() + 100, e.getDepartment())).collect(Collectors.toList());
         empList.forEach( e -> System.out.println(e.getName()));
-
+        //sum of all employee salaries
         double sum = employees.stream().mapToDouble(Employee::getSalary).sum();
         System.out.println(sum);
 
