@@ -24,17 +24,37 @@ public class UniqueKeyValueMap {
     }
 
     public static void main(String[] args) {
-        UniqueKeyValueMap map = new UniqueKeyValueMap();
+        //uniqueKeyValueMapTest();
+        customMapTest();
+    }
 
+    private static void customMapTest() {
+        CustomMap map = new CustomMap();
+        map.put("1", "one");
+        map.put("2", "two");
+        //map.put("3", "one");
+    }
+
+    private static void uniqueKeyValueMapTest() {
+        UniqueKeyValueMap map = new UniqueKeyValueMap();
         map.put(1, "one");
         map.put(2, "two");
-
         try {
             map.put(3, "two");
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         }
-
         map.display();
+    }
+}
+
+
+class CustomMap extends HashMap<String, String> {
+    @Override
+    public String put(String key, String value) {
+        if(this.containsValue(value)){
+            throw new IllegalArgumentException("Value lready exists");
+        }
+        return super.put(key, value);
     }
 }

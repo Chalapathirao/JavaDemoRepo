@@ -1,6 +1,7 @@
 package com.chalapathi.streams;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,3 +17,4 @@ public class PeekTest {
                 .collect(Collectors.toList());
     }
 }
+
