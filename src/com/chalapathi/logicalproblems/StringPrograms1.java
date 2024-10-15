@@ -9,11 +9,17 @@ import java.util.stream.Stream;
 public class StringPrograms1 {
     public static void main(String[] args) {
 //        convertArrayOfStringsToOneString();
-        removeduplicateCharsFromString();
+//        removeduplicateCharsFromString();
+        /*System.out.println("Given Strings: anagram status: " + chackTwoStringsareAnagrams("listen", "silent"));
+        System.out.println("Given Strings: anagram status: " + chackTwoStringsareAnagrams("alaram", "mlaram"));
+        System.out.println("anagram status: "+areAnagramsUsingStreams("listen", "silent"));*/
+
+        reverseStringWithoutReverseMethod();
+
     }
 
     private static void convertArrayOfStringsToOneString() {
-        String[] stringArray = { "My", "name", "is", "Chalapathi", "!" };
+        String[] stringArray = {"My", "name", "is", "Chalapathi", "!"};
         System.out.println(Arrays.toString(stringArray)); // Arrays.toString(arr)
 
         // OR
@@ -40,7 +46,7 @@ public class StringPrograms1 {
 //        System.out.println(result);
 
         //OR
-       StringBuilder result = new StringBuilder();
+        StringBuilder result = new StringBuilder();
         for (String s : stringArray) {
             result = new StringBuilder(result.toString().concat(s));
         }
@@ -72,8 +78,19 @@ public class StringPrograms1 {
         for (char c : set) {
             result.append(c);
         }
-        // Print the result
         System.out.println(result);  // Output: progamin
+
+        //OR
+
+        StringBuilder result1 = new StringBuilder();
+        for (int i = 0; i < inputString.length(); i++) {
+            char currentChar = inputString.charAt(i);
+            // Append only if the character is not already in the result
+            if (result1.indexOf(String.valueOf(currentChar)) == -1) {
+                result1.append(currentChar);
+            }
+        }
+        System.out.println(result1);
 
         //OR
 
@@ -87,6 +104,57 @@ public class StringPrograms1 {
         System.out.println(collect1);
     }
 
+    public static boolean chackTwoStringsareAnagrams(String str1, String str2) {
+        //The simplest way to check if two strings are anagrams is to sort both strings and compare them.
+        // If lengths differ, they cannot be anagrams
+        if (str1.length() != str2.length()) {
+            return false;
+        }
+        // Convert strings to char arrays, sort them, and compare
+        char[] array1 = str1.toCharArray();
+        char[] array2 = str2.toCharArray();
+        Arrays.sort(array1);
+        Arrays.sort(array2);
+        return Arrays.equals(array1, array2);
+    }
 
+    public static boolean areAnagramsUsingStreams(String str1, String str2) {
+        if (str1.length() != str2.length()) {
+            return false;
+        }
+        // Convert strings to sorted streams and compare them
+        return Arrays.equals(Arrays.stream(str1.split(""))
+                .sorted()
+                .toArray(), Arrays.stream(str2.split(""))
+                .sorted()
+                .toArray());
+    }
+
+
+    public static void reverseStringWithoutReverseMethod(){
+        String s = "HelloWorld";
+
+        // Using StringBuilder to reverse
+        StringBuilder sb = new StringBuilder(s);
+        String reversed = sb.reverse().toString();
+        System.out.println("Reversed String: " + reversed);  // Output: olleh
+
+        //OR
+
+        StringBuffer sb1 = new StringBuffer();
+        for (int i = s.length() - 1; i >= 0; i--) {
+            sb1.append(s.charAt(i));
+        }
+        System.out.println(sb1);
+
+        //OR
+        char[] ch =s.toCharArray();
+        StringBuilder rev= new StringBuilder();
+        for(int i=ch.length-1;i>=0;i--){
+            rev.append(ch[i]);
+        }
+        System.out.println(rev);
+
+    }
 
 }
