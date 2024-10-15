@@ -109,7 +109,8 @@ public class BookService {
         books.forEach(System.out::println);
         System.out.println();
         Collections.sort(books, (o1, o2) -> o1.getName().compareTo(o2.getName()));
-        Collections.sort(books, Comparator.comparing(BookPojo::getName));
+        books.sort(Comparator.comparing(BookPojo::getName));
+        books.stream().sorted(Comparator.comparing(BookPojo::getName)).toList().forEach(System.out::println);
         System.out.println();
     }
 }
