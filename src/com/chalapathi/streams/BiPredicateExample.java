@@ -18,6 +18,7 @@ public class BiPredicateExample {
 
 
         BiPredicate<String,String> equalsPredicate= ( s1,  s2) ->s1.equals(s2);
+       // BiPredicate<String,String> equalsPredicate= String::equals;
         BiPredicate<String,String> lengthPredicate=(s1,s2)->s1.length()==s2.length();
 
         boolean output=lengthPredicate.and(equalsPredicate).test("madam","madam");
