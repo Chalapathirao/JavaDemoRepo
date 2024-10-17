@@ -29,7 +29,7 @@ public class MapReduceExample {
 
         System.out.println("reduceSum = "+reduceSum);
 
-        Integer mulResult = numbers.stream().reduce(1, (a, b) -> a * b);
+        Integer mulResult = numbers.stream().reduce(1, (a, b) -> a * b); //Math::multiplyExact
         System.out.println("mulResult = "+mulResult);
         System.out.println("multiply with method reference= "+numbers.stream().reduce(1, Math::multiplyExact));
 

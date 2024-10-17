@@ -88,6 +88,7 @@ public class Java8SalaryDeptWise {
         System.out.println(sum);
 
         Map<String, String> collect = employees.stream().collect(Collectors.toMap(Employee::getName, Employee::getDepartment));
+       // Map<String, String> collectt = employees.stream().collect(Collectors.toMap(e->e.getName(), e->e.getDepartment()));
         collect.forEach((k,v) -> System.out.println(k +" "+v));
 
 

@@ -41,7 +41,7 @@ public class NthHighestSalaryDemo {
     public static Map.Entry<String, Integer> getNthHighestSalary(int num, Map<String, Integer> map) {
         return map.entrySet().stream()
                 .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
-                .collect(Collectors.toList())
+                .toList()
                 .get(num - 1);
     }
 

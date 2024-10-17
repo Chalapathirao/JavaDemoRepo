@@ -42,7 +42,7 @@ public class SortMapDemo {
 		System.out.println(employeeMap);
 
 		employeeMap.entrySet().stream()
-				.sorted(Entry.comparingByKey(Comparator.comparing(Employee5::getDept).reversed()))
+				.sorted(Map.Entry.comparingByKey(Comparator.comparing(Employee5::getDept).reversed()))
 				.forEach(System.out::println);
 
 	}
