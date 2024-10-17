@@ -18,8 +18,9 @@ public class ArrayPrograms1 {
 //          removeElementFromArray(new int[] { 10, 5, -15, 20, -30, 22, -5 }, 3);
 //        arrayClone();
 //        sortAnArrayInAscendingOrder(new int[] { 10, 5, -15, 20, -30, 22, -5 });
-        printDuplicateElementsInArray();
-        pringTheFrequencyOfEachElementInArray();
+ //       printDuplicateElementsInArray();
+ //       pringTheFrequencyOfEachElementInArray();
+        extractPairFromArrayWithFixedSum();
     }
 
     private static void smallestAndLargestNumberInArray() {
@@ -294,6 +295,20 @@ public class ArrayPrograms1 {
         Integer[] array = {1, 2, 3, 2, 4, 5, 3, 6, 4, 7, 8, 5, 3};
         Arrays.stream(array).collect(Collectors.groupingBy(e -> e, Collectors.counting()))
                 .forEach((key, value) -> System.out.println(key + " occurs " + value + " time(s)"));
+    }
+
+    private static void extractPairFromArrayWithFixedSum(){
+        int [] nums = {2, 4, 3, 7, 1, 5, 9, 8};
+        int target=10;
+        Set<Integer> set= new HashSet<>();
+        for (int num : nums) {
+            if (!set.contains(target - num)) {
+                set.add(num);
+            } else {
+                int res = target - num;
+                System.out.println("(" + res + "," + num + ")");
+            }
+        }
     }
 
 }
