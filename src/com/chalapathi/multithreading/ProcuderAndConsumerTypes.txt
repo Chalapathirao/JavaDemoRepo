@@ -1,0 +1,265 @@
+In Java, there are several ways to implement the Producer-Consumer pattern using multithreading. Here are some popular methods:
+
+1. Using wait() and notify() with synchronized
+This is a classic approach where the producer and consumer threads communicate using the Object.wait() and Object.notify() methods inside a synchronized block.
+
+java
+Copy code
+import java.util.LinkedList;
+import java.util.Queue;
+
+class ProducerConsumerUsingWaitNotify {
+    private final Queue<Integer> buffer = new LinkedList<>();
+    private final int MAX_SIZE = 5;
+
+    public void produce() throws InterruptedException {
+        int value = 0;
+        while (true) {
+            synchronized (this) {
+                while (buffer.size() == MAX_SIZE) {
+                    wait();  // Wait if buffer is full
+                }
+                buffer.add(value++);
+                System.out.println("Produced " + value);
+                notify();  // Notify consumer
+                Thread.sleep(1000);
+            }
+        }
+    }
+
+    public void consume() throws InterruptedException {
+        while (true) {
+            synchronized (this) {
+                while (buffer.isEmpty()) {
+                    wait();  // Wait if buffer is empty
+                }
+                int value = buffer.poll();
+                System.out.println("Consumed " + value);
+                notify();  // Notify producer
+                Thread.sleep(1000);
+            }
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        ProducerConsumerUsingWaitNotify pc = new ProducerConsumerUsingWaitNotify();
+        Thread producerThread = new Thread(() -> {
+            try {
+                pc.produce();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        Thread consumerThread = new Thread(() -> {
+            try {
+                pc.consume();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        producerThread.start();
+        consumerThread.start();
+    }
+}
+2. Using BlockingQueue
+Java’s BlockingQueue (e.g., ArrayBlockingQueue) provides built-in thread-safety, making it ideal for implementing the Producer-Consumer pattern without needing explicit synchronization.
+
+java
+Copy code
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+
+class ProducerConsumerUsingBlockingQueue {
+    private final BlockingQueue<Integer> buffer = new ArrayBlockingQueue<>(5);
+
+    public void produce() throws InterruptedException {
+        int value = 0;
+        while (true) {
+            buffer.put(value);  // Blocks if buffer is full
+            System.out.println("Produced " + value);
+            value++;
+            Thread.sleep(1000);
+        }
+    }
+
+    public void consume() throws InterruptedException {
+        while (true) {
+            int value = buffer.take();  // Blocks if buffer is empty
+            System.out.println("Consumed " + value);
+            Thread.sleep(1000);
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        ProducerConsumerUsingBlockingQueue pc = new ProducerConsumerUsingBlockingQueue();
+        Thread producerThread = new Thread(() -> {
+            try {
+                pc.produce();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        Thread consumerThread = new Thread(() -> {
+            try {
+                pc.consume();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        producerThread.start();
+        consumerThread.start();
+    }
+}
+3. Using java.util.concurrent.locks.Lock and Condition
+This approach provides finer control over synchronization, allowing us to use multiple Condition objects for better performance and readability.
+
+java
+Copy code
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+class ProducerConsumerUsingLockCondition {
+    private final Queue<Integer> buffer = new LinkedList<>();
+    private final int MAX_SIZE = 5;
+    private final Lock lock = new ReentrantLock();
+    private final Condition notFull = lock.newCondition();
+    private final Condition notEmpty = lock.newCondition();
+
+    public void produce() throws InterruptedException {
+        int value = 0;
+        while (true) {
+            lock.lock();
+            try {
+                while (buffer.size() == MAX_SIZE) {
+                    notFull.await();  // Wait if buffer is full
+                }
+                buffer.add(value);
+                System.out.println("Produced " + value);
+                value++;
+                notEmpty.signal();  // Notify consumer
+            } finally {
+                lock.unlock();
+            }
+            Thread.sleep(1000);
+        }
+    }
+
+    public void consume() throws InterruptedException {
+        while (true) {
+            lock.lock();
+            try {
+                while (buffer.isEmpty()) {
+                    notEmpty.await();  // Wait if buffer is empty
+                }
+                int value = buffer.poll();
+                System.out.println("Consumed " + value);
+                notFull.signal();  // Notify producer
+            } finally {
+                lock.unlock();
+            }
+            Thread.sleep(1000);
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        ProducerConsumerUsingLockCondition pc = new ProducerConsumerUsingLockCondition();
+        Thread producerThread = new Thread(() -> {
+            try {
+                pc.produce();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        Thread consumerThread = new Thread(() -> {
+            try {
+                pc.consume();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        producerThread.start();
+        consumerThread.start();
+    }
+}
+4. Using Semaphore
+Semaphore controls the number of threads accessing a shared resource. By using two semaphores, we can control when the buffer is full or empty.
+
+java
+Copy code
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.concurrent.Semaphore;
+
+class ProducerConsumerUsingSemaphore {
+    private final Queue<Integer> buffer = new LinkedList<>();
+    private final int MAX_SIZE = 5;
+    private final Semaphore empty = new Semaphore(MAX_SIZE);
+    private final Semaphore full = new Semaphore(0);
+    private final Semaphore mutex = new Semaphore(1);
+
+    public void produce() throws InterruptedException {
+        int value = 0;
+        while (true) {
+            empty.acquire();  // Wait if buffer is full
+            mutex.acquire();  // Ensure exclusive access
+            buffer.add(value);
+            System.out.println("Produced " + value);
+            value++;
+            mutex.release();
+            full.release();  // Notify consumer
+            Thread.sleep(1000);
+        }
+    }
+
+    public void consume() throws InterruptedException {
+        while (true) {
+            full.acquire();  // Wait if buffer is empty
+            mutex.acquire();  // Ensure exclusive access
+            int value = buffer.poll();
+            System.out.println("Consumed " + value);
+            mutex.release();
+            empty.release();  // Notify producer
+            Thread.sleep(1000);
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        ProducerConsumerUsingSemaphore pc = new ProducerConsumerUsingSemaphore();
+        Thread producerThread = new Thread(() -> {
+            try {
+                pc.produce();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        Thread consumerThread = new Thread(() -> {
+            try {
+                pc.consume();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        producerThread.start();
+        consumerThread.start();
+    }
+}
+Each method provides a different level of control, performance, and simplicity, suitable for various scenarios in multithreaded applications.
