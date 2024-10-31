@@ -10,6 +10,7 @@ public class OutOfMemoErrorTest {
         Random random = new Random();
         while (true){
             map.put(random.nextInt(), "NextrandomValue"+random.nextInt());
+            System.out.println(map);
         }
 
      }
