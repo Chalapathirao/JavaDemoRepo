@@ -5,7 +5,7 @@ public class GenericsTest1 {
         Box<String> box = new Box<>("items");
         System.out.println(box.getItem());
         Integer[] intArray = {1, 2, 3};
-       // box.printArray(intArray);
+        //box.printArray(intArray);
     }
 }
 
@@ -26,7 +26,7 @@ class Box<T> {
 
     public void printArray(T[] array) {
         for (T element : array) {
-            System.out.print(element + " ");
+            System.out.print(element);
         }
     }
 }
