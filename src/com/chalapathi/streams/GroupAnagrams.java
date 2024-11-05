@@ -6,7 +6,7 @@ import java.util.stream.*;
 public class GroupAnagrams {
     public static void main(String[] args) {
         String[] words = {"cat", "tac", "rat", "bat", "tab"};
-
+//        Stream.of(words);
         Map<String, List<String>> anagrams = Arrays.stream(words)
                 .collect(Collectors.groupingBy(
                         word -> {

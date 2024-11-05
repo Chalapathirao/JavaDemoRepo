@@ -18,7 +18,8 @@ final class Student {
         for (Map.Entry<String, String> entry : metadata.entrySet()) {
             tempMap.put(entry.getKey(), entry.getValue());
         }
-        this.metadata = tempMap;
+       // this.metadata = tempMap;
+        this.metadata = Map.copyOf(metadata);
     }
 
     public String getName() {

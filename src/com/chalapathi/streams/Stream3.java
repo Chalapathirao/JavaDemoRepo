@@ -20,7 +20,7 @@ public class Stream3 {
 //        Stream<String> stream = Arrays.stream(array);
         Stream<String> stream = Arrays.stream(new String[]{"Hi", "Hello"});
         Stream<String> empty = Stream.empty();
-        Stream<String> generate = Stream.generate(()-> "one"); //infininate numbers
+        Stream<String> generate = Stream.generate(()-> "one"); //infinite numbers
         Stream<Integer> randomNumbers = Stream.generate(() -> (new Random()).nextInt(100));
         //randomNumbers.limit(20).forEach(System.out::println);
         Stream<Object> build = Stream.builder().add("Java").add("Python").build();

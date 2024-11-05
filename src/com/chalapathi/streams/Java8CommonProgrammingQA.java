@@ -168,8 +168,8 @@ public class Java8CommonProgrammingQA {
         //9 .Find the student who has second rank
 
         Student student = studentList.stream()
-                .sorted(Comparator.comparing(Student::getRank))
-                .skip(2)
+                .sorted(Comparator.comparing(Student::getRank).reversed())
+                .skip(1)//n-1
                 .findFirst().get();
         System.out.println(student);
 
