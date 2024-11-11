@@ -1,4 +1,4 @@
-package com.chalapathi.streams;
+package com.chalapathi.multithreading;
 
 public class EvenAndOddPrinterBy2Threads implements Runnable {
 

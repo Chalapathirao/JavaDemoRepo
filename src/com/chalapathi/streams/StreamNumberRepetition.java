@@ -1,4 +1,4 @@
-package com.chalapathi.logicalproblems;
+package com.chalapathi.streams;
 
 import java.util.*;
 import java.util.function.Function;

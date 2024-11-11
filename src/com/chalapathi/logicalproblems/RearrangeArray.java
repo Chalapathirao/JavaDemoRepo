@@ -27,8 +27,5 @@ public class RearrangeArray {
         System.out.println(Arrays.toString(arr));
         rearrange(arr);
         System.out.println(Arrays.toString(arr));
-        /*for (int num : arr) {
-            System.out.print(num + " ");
-        }*/
     }
 }
