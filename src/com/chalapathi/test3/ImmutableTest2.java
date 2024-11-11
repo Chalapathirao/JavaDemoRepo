@@ -2,8 +2,10 @@ package com.chalapathi.test3;
 
 
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 final class Student {
     private final String name;
@@ -20,6 +22,7 @@ final class Student {
         }
        // this.metadata = tempMap;
         this.metadata = Map.copyOf(metadata);
+        //Collections.unmodifiableMap(metadata);
     }
 
     public String getName() {
@@ -38,6 +41,15 @@ final class Student {
         }
         return tempMap;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", regNo=" + regNo +
+                ", metadata=" + metadata +
+                '}';
+    }
 }
 
 public class ImmutableTest2 {
@@ -47,16 +59,18 @@ public class ImmutableTest2 {
         map.put("2", "second");
 
         Student s = new Student("ABC", 101, map);
-        System.out.println(s.getName()); // Output: ABC
-        System.out.println(s.getRegNo()); // Output: 101
-        System.out.println(s.getMetadata()); // Output: {1=first, 2=second}
+        System.out.println(s);
+//        System.out.println(s.getName()); // Output: ABC
+//        System.out.println(s.getRegNo()); // Output: 101
+//        System.out.println(s.getMetadata()); // Output: {1=first, 2=second}
 
         // Attempt to modify the original map
         map.put("3", "third");
-        System.out.println(s.getMetadata()); // Output: {1=first, 2=second}
+        //System.out.println(s.getMetadata()); // Output: {1=first, 2=second}
 
         // Attempt to modify the returned map
         s.getMetadata().put("4", "fourth");
-        System.out.println(s.getMetadata()); // Output: {1=first, 2=second}
+        //System.out.println(s.getMetadata()); // Output: {1=first, 2=second}
+        System.out.println(s);
     }
 }

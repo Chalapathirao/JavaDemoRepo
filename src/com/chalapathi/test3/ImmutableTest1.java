@@ -20,12 +20,21 @@ final class ImmutablePerson {
         return age;
     }
 
-    // No methods that modify fields are present
+    @Override
+    public String toString() {
+        return "ImmutablePerson{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+// No methods that modify fields are present
 }
 
 public class ImmutableTest1 {
     public static void main(String[] args) {
-       ImmutablePerson p1 = new ImmutablePerson("vicky",4);
-       //can not modify
+        ImmutablePerson p1 = new ImmutablePerson("vicky", 4);
+        System.out.println(p1);
+
+        //can not modify
     }
 }
