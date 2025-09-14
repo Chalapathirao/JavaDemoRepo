@@ -2,6 +2,7 @@ package com.chalapathi.newfeatures.java8;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Java8Test1 {
     public static void main(String[] args) {
@@ -30,7 +31,7 @@ public class Java8Test1 {
         //averageAgeOfMaleandFemaleEmployees(employees);
 //        youngestMaleEmployeeInITDepartment(employees);
 //        mostExperiencedEmployee(employees);
-        mostExperiencedEmployeeInEachDept(employees);
+  //      mostExperiencedEmployeeInEachDept(employees);
         //    totalAndAvgSalOfOrganization(employees);
 
 //        nThHighestSalary(employees, 1);
@@ -38,7 +39,10 @@ public class Java8Test1 {
 //        nThHighestSalary(employees, 3);
 
         //  groupEmployeesBydepartment(employees);
-        emplyNamesBydepartmentSort(employees);
+       // emplyNamesBydepartmentSort(employees);
+        //employeesStartsWithLetter(employees, "A");
+        //sortEmployeesBySalary(employees);
+        sorting1();
     }
 
     public static List<Employee> getEmployees() {
@@ -228,6 +232,44 @@ public class Java8Test1 {
                                         list -> list.stream().sorted().collect(Collectors.toList())))));
         System.out.println(sortedNamesByDept);
     }
+
+    //Find employees whose names start with ‘A’.
+
+    private static void employeesStartsWithLetter(List<Employee> employees, String letter){
+        employees.stream().filter(e -> e.getName().startsWith(letter)).forEach(System.out::println);
+    }
+    //Sort employees by salary (ascending or descending)
+    private static void sortEmployeesBySalary(List<Employee> employees){
+        employees.stream().sorted(Comparator.comparingDouble(Employee::getSalary)).forEach(System.out::println);
+        //List<Employee> sortedDesc = employees.stream()
+        //    .sorted(Comparator.comparingDouble(Employee::getSalary).reversed())
+        //    .collect(Collectors.toList());
+    }
+    //Sort employees by salary and Age(ascending or descending)
+    private static void sortEmployeesBySalaryAndAge(List<Employee> employees){
+        employees.stream().sorted(Comparator.comparingDouble(Employee::getSalary).thenComparing(Employee::getAge)).forEach(System.out::println);
+
+        //List<Employee> sortedList = employees.stream()
+        //    .sorted(Comparator.comparing(Employee::getName)
+        //                      .thenComparingDouble(Employee::getSalary))
+        //    .collect(Collectors.toList());
+    }
+
+    private static void sorting1(){
+        List<Integer> sortedNumbers = Stream.of(5, 2, 8, 1)
+                .sorted(Comparator.naturalOrder())
+                .toList();
+        System.out.println(sortedNumbers);
+        List<Integer> sortedNumbers1 = Stream.of(5, 2, 8, 1)
+                .sorted(Comparator.reverseOrder())
+                .toList();
+        System.out.println(sortedNumbers1);
+        List<Integer> reverseSorted = sortedNumbers.stream()
+                .sorted((i1, i2) -> i2.compareTo(i1))
+                .toList();
+        System.out.println(reverseSorted);
+    }
+    //Sort a stream using natural order or a custom Comparator
 
 }
 
